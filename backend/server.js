@@ -50,10 +50,6 @@ const __dirname = path.resolve();
 app.use(express.json({ limit: "10mb" })); // to handle large payloads
 app.use(cookieParser());
 
-// ✅ test route to check if server is alive
-app.get("/", (req, res) => {
-  res.send("Hello from server 🚀");
-});
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -63,22 +59,13 @@ app.use("/api/coupon", couponRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-// // Start server only if DB connects
-// connectDB()
-//   .then(() => {
-//    app.listen(PORT, "0.0.0.0", () => {
-//   console.log(`✅ Server is running on http://localhost:${PORT}`);
-// });
-//   })
-//   .catch((err) => {
-//     console.error("❌ DB connection failed:", err.message);
-//   });
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-  app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+  app.get(/.*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
 });
 
 }
