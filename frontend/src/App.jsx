@@ -12,6 +12,9 @@ import CategoryPage from "./pages/CategoryPage"
 import CartPage from "./pages/CartPage"
 import useCartStore from "./stores/useCartStore"
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage"
+import PurchaseCancelPage from "./pages/PurchaseCancelPage"
+
+
 
 
 function App() {
@@ -50,9 +53,9 @@ function App() {
       <Route
                   path='/purchase-success'
                   element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />}
+                  
                 />
                 <Route path='/purchase-cancel' element={user ? <PurchaseCancelPage /> : <Navigate to='/login' />} />
-      
     </Routes>
     <Toaster/>
      </div>
